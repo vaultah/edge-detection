@@ -18,6 +18,7 @@ public:
     QImage convolution(const matrix&, const QImage&);
     QImage canny(const QImage&, float, float);
     QImage sobel(const QImage&);
+    QImage prewitt(const QImage&);
 
 private slots:
     void on_pushButton_clicked();

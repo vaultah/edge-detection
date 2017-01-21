@@ -6,6 +6,7 @@ Currently available algorithms:
 
  - Canny edge detector
  - Sobel edge detector
+ - Prewitt edge detector
 
 The project includes GUI for viewing results.
 
@@ -24,3 +25,7 @@ Photo by [Michael Salisbury](http://msalisbu.com/)
 ### Sobel edge detector
 
 ![sobel](http://i.imgur.com/cyXqOqE.png)
+
+### Prewitt edge detector
+
+![prewitt](http://i.imgur.com/2kWPQat.png)

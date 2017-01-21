@@ -159,6 +159,22 @@ QImage MainWindow::sobel(const QImage& input) {
     return res;
 }
 
+QImage MainWindow::prewitt(const QImage& input) {
+    QImage res(input.size(), input.format());
+    QImage gx = convolution(prewittx, input), gy = convolution(prewitty, input);
+    float i;
+
+    for (int x = 0; x < res.width(); x++) {
+        for (int y = 0; y < res.height(); y++) {
+            i = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
+            i = qBound(0.f, i, 255.f);
+            res.setPixel(x, y, QColor(i, i, i).rgb());
+        }
+    }
+
+    return res;
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     auto file = QFileDialog::getOpenFileName(this, tr("Select a single image"));
@@ -188,6 +204,9 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
         break;
     case 2:
         display(sobel(grayscale));
+        break;
+    case 3:
+        display(prewitt(grayscale));
         break;
     default:
         break;

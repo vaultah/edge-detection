@@ -63,6 +63,11 @@
            <string>Sobel</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Prewitt</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
