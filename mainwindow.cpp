@@ -23,8 +23,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    auto file = QFileDialog::getOpenFileName(this, tr("Select a single image"));
-    original = QImage(file);
+    filename = QFileDialog::getOpenFileName(this, tr("Select a single image"));
+    original = QImage(filename);
     display(original);
     grayscale = original.convertToFormat(QImage::Format_Grayscale8);
     ui->comboBox->setCurrentIndex(0);
@@ -37,6 +37,7 @@ void MainWindow::display(const QImage& image) {
     scene->setSceneRect(image.rect());
     ui->image->setScene(scene);
     ui->image->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+    current = image;
 }
 
 
@@ -64,4 +65,12 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 void MainWindow::resizeEvent(QResizeEvent* event) {
     QMainWindow::resizeEvent(event);
     ui->image->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    auto path = QFileDialog::getExistingDirectory(this, tr("Destination"));
+    auto name = QString("%1_%2").arg(ui->comboBox->currentText(), QFileInfo(filename).fileName());
+    current.save(QDir(path).filePath(name));
 }

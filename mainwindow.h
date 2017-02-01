@@ -20,9 +20,12 @@ private slots:
     void on_pushButton_clicked();
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
-    QImage original, grayscale;
+    QImage original, grayscale, current;
+    QString filename;
     QGraphicsScene *scene;
 
     void display(const QImage&);
