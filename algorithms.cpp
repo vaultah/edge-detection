@@ -37,6 +37,18 @@ QImage convolution(const matrix& kernel, const QImage& image) {
 }
 
 
+void magnitude(QImage& input, const QImage& gx, const QImage& gy) {
+    float m;
+    for (int x = 0; x < input.width(); x++) {
+        for (int y = 0; y < input.height(); y++) {
+            m = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
+            m = qBound(0.f, m, 255.f);
+            input.setPixel(x, y, QColor(m, m, m).rgb());
+        }
+    }
+}
+
+
 QImage hysteresis(const QImage& image, float tmin, float tmax) {
     auto res = QImage(image.size(), image.format());
     res.fill(Qt::black);
@@ -99,13 +111,7 @@ QImage canny(const QImage& input, float tmin, float tmax) {
     auto gx = convolution(sobelx, res);
     auto gy = convolution(sobely, res);
 
-    for (int x = 0; x < res.width(); x++) {
-        for (int y = 0; y < res.height(); y++) {
-            g = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
-            g = qBound(0.f, g, 255.f);
-            res.setPixel(x, y, QColor(g, g, g).rgb());
-        }
-    }
+    magnitude(res, gx, gy);
 
     // Non-maximum suppression
     auto cmp = [](QRgb p, QRgb c, QRgb n) -> bool {
@@ -133,33 +139,13 @@ QImage canny(const QImage& input, float tmin, float tmax) {
 
 QImage sobel(const QImage& input) {
     QImage res(input.size(), input.format());
-    QImage gx = convolution(sobelx, input), gy = convolution(sobely, input);
-    float i;
-
-    for (int x = 0; x < res.width(); x++) {
-        for (int y = 0; y < res.height(); y++) {
-            i = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
-            i = qBound(0.f, i, 255.f);
-            res.setPixel(x, y, QColor(i, i, i).rgb());
-        }
-    }
-
+    magnitude(res, convolution(sobelx, input), convolution(sobely, input));
     return res;
 }
 
 
 QImage prewitt(const QImage& input) {
     QImage res(input.size(), input.format());
-    QImage gx = convolution(prewittx, input), gy = convolution(prewitty, input);
-    float i;
-
-    for (int x = 0; x < res.width(); x++) {
-        for (int y = 0; y < res.height(); y++) {
-            i = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
-            i = qBound(0.f, i, 255.f);
-            res.setPixel(x, y, QColor(i, i, i).rgb());
-        }
-    }
-
+    magnitude(res, convolution(prewittx, input), convolution(prewitty, input));
     return res;
 }

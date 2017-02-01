@@ -6,5 +6,6 @@ QImage canny(const QImage&, float, float);
 QImage sobel(const QImage&);
 QImage prewitt(const QImage&);
 QImage hysteresis(const QImage&, float, float);
+void magnitude(QImage&, const QImage&, const QImage&);
 
 #endif // ALGORITHMS_H
