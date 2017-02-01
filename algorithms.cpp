@@ -149,3 +149,16 @@ QImage prewitt(const QImage& input) {
     magnitude(res, convolution(prewittx, input), convolution(prewitty, input));
     return res;
 }
+
+QImage roberts(const QImage& input) {
+    QImage res(input.size(), input.format());
+    magnitude(res, convolution(robertsx, input), convolution(robertsy, input));
+    return res;
+}
+
+
+QImage scharr(const QImage& input) {
+    QImage res(input.size(), input.format());
+    magnitude(res, convolution(scharrx, input), convolution(scharry, input));
+    return res;
+}

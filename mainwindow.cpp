@@ -1,4 +1,5 @@
 #include <QtWidgets>
+#include <functional>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "algorithms.h"
@@ -50,13 +51,14 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
     case 1:
         display(canny(grayscale, 40, 50));
         break;
-    case 2:
-        display(sobel(grayscale));
-        break;
-    case 3:
-        display(prewitt(grayscale));
-        break;
     default:
+        function<QImage(const QImage&)> functions[] = {
+            sobel,
+            prewitt,
+            roberts,
+            scharr
+        };
+        display(functions[index - 2](original));
         break;
     }
 }

@@ -68,6 +68,16 @@
            <string>Prewitt</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Roberts</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Scharr</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>
