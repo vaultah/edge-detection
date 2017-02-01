@@ -15,10 +15,6 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    QImage convolution(const matrix&, const QImage&);
-    QImage canny(const QImage&, float, float);
-    QImage sobel(const QImage&);
-    QImage prewitt(const QImage&);
 
 private slots:
     void on_pushButton_clicked();
@@ -30,7 +26,6 @@ private:
     QGraphicsScene *scene;
 
     void display(const QImage&);
-    QImage hysteresis(const QImage&, float, float);
     void resizeEvent(QResizeEvent*);
 };
 
