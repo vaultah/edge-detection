@@ -49,7 +49,7 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
         display(original);
         break;
     case 1:
-        display(canny(grayscale, 1, 100, 200));
+        display(canny(grayscale, 1, 85, 170));
         break;
     default:
         function<QImage(const QImage&)> functions[] = {

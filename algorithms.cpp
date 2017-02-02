@@ -9,7 +9,7 @@
 using namespace std;
 
 
-matrix gaussian(float sigma) {
+matrix gaussian_kernel(float sigma) {
     matrix gauss(5, matrix::value_type(5));
     float sum = 0, s = 2 * pow(sigma, 2);
 
@@ -110,7 +110,7 @@ QImage canny(const QImage& input, float sigma, float tmin, float tmax) {
     QImage res;
 
     // Gaussian blur
-    res = convolution(gaussian(sigma), input);
+    res = convolution(gaussian_kernel(sigma), input);
 
     // Gradients
     auto gx = convolution(sobelx, res);
