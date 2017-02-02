@@ -2,10 +2,40 @@
 #include <cmath>
 #include <utility>
 #include <queue>
+#include <vector>
 #include "kernels.h"
 
 
 using namespace std;
+
+
+matrix gaussian(float sigma) {
+    matrix gauss(5, matrix::value_type(5));
+    float sum = 0, s = 2 * pow(sigma, 2);
+
+    for (int x = -2; x <= 2; x++)
+        for (int y = -2; y <= 2; y++)
+            sum += (gauss[x + 2][y + 2] = exp(-(pow(x, 2) + pow(y, 2)) / s) / s / M_PI);
+
+    for (auto& row : gauss)
+        for (auto& x : row)
+            x /= sum;
+
+    return gauss;
+}
+
+
+void magnitude(QImage& input, const QImage& gx, const QImage& gy) {
+    float m;
+    for (int x = 0; x < input.width(); x++) {
+        for (int y = 0; y < input.height(); y++) {
+            m = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
+            m = qBound(0.f, m, 255.f);
+            input.setPixel(x, y, QColor(m, m, m).rgb());
+        }
+    }
+}
+
 
 QImage convolution(const matrix& kernel, const QImage& image) {
     int kw = kernel[0].size(), kh = kernel.size(),
@@ -34,18 +64,6 @@ QImage convolution(const matrix& kernel, const QImage& image) {
     }
 
     return out;
-}
-
-
-void magnitude(QImage& input, const QImage& gx, const QImage& gy) {
-    float m;
-    for (int x = 0; x < input.width(); x++) {
-        for (int y = 0; y < input.height(); y++) {
-            m = hypot(qRed(gx.pixel(x, y)), qRed(gy.pixel(x, y)));
-            m = qBound(0.f, m, 255.f);
-            input.setPixel(x, y, QColor(m, m, m).rgb());
-        }
-    }
 }
 
 
@@ -88,24 +106,11 @@ QImage hysteresis(const QImage& image, float tmin, float tmax) {
 }
 
 
-QImage canny(const QImage& input, float tmin, float tmax) {
-    // Gaussian blur
-    matrix gauss {
-        {2,  4,  5,  4,  2},
-        {4,  9, 12,  9,  4},
-        {5, 12, 15, 12,  5},
-        {4,  9, 12,  9,  4},
-        {2,  4,  5,  4,  2}
-    };
-
+QImage canny(const QImage& input, float sigma, float tmin, float tmax) {
     QImage res;
-    float g;
 
-    for (auto& row : gauss)
-        for (auto& x : row)
-            x /= 159;
-
-    res = convolution(gauss, input);
+    // Gaussian blur
+    res = convolution(gaussian(sigma), input);
 
     // Gradients
     auto gx = convolution(sobelx, res);

@@ -2,7 +2,7 @@
 #define ALGORITHMS_H
 
 QImage convolution(const matrix&, const QImage&);
-QImage canny(const QImage&, float, float);
+QImage canny(const QImage&, float, float, float);
 QImage sobel(const QImage&);
 QImage prewitt(const QImage&);
 QImage roberts(const QImage&);
