@@ -18,12 +18,12 @@ The project includes GUI for viewing results.
 
 Photo by [Michael Salisbury](http://msalisbu.com/)
 
-![original](http://i.imgur.com/DeWyKnP.png)
+![original](http://i.imgur.com/J5QSxF9.png)
 
 ### Canny edge detector
 
-![canny](http://i.imgur.com/tmacMBm.png)
+![canny](http://i.imgur.com/pq3goPg.png)
 
 ### Sobel edge detector
 
-![sobel](http://i.imgur.com/epUN52S.png)
+![sobel](http://i.imgur.com/AlqNaAy.png)
