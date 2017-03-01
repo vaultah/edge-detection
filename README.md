@@ -7,6 +7,8 @@ Currently available algorithms:
  - Canny edge detector
  - Sobel edge detector
  - Prewitt edge detector
+ - Roberts cross
+ - Scharr operator
 
 The project includes GUI for viewing results.
 
@@ -16,16 +18,12 @@ The project includes GUI for viewing results.
 
 Photo by [Michael Salisbury](http://msalisbu.com/)
 
-![original](http://i.imgur.com/8NmqiNJ.png)
+![original](http://i.imgur.com/DeWyKnP.png)
 
 ### Canny edge detector
 
-![canny](http://i.imgur.com/qRqPXtV.png)
+![canny](http://i.imgur.com/tmacMBm.png)
 
 ### Sobel edge detector
 
-![sobel](http://i.imgur.com/cyXqOqE.png)
-
-### Prewitt edge detector
-
-![prewitt](http://i.imgur.com/2kWPQat.png)
+![sobel](http://i.imgur.com/epUN52S.png)
