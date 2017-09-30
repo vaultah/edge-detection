@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -58,7 +59,7 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
             roberts,
             scharr
         };
-        display(functions[index - 2](original));
+        display(functions[index - 2](grayscale));
         break;
     }
 }

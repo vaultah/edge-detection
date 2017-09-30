@@ -3,7 +3,7 @@
 
 void gaussian_kernel(float);
 void magnitude(QImage&, const QImage&, const QImage&);
-QImage convolution(const matrix&, const QImage&);
+QImage convolution(const auto&, const QImage&);
 QImage canny(const QImage&, float, float, float);
 QImage sobel(const QImage&);
 QImage prewitt(const QImage&);
